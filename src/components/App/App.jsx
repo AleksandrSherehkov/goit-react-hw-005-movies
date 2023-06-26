@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImageGallery from '../ImageGallery/ImageGallery';
+import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { GlobalStyle } from 'services/styles/GlobalStyle';
 import { WrapperStyled } from './App.styled';

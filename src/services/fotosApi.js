@@ -10,7 +10,7 @@ axios.defaults.params = {
   per_page: 12,
 };
 
-export const getEditorChoiceFotos = page => {
+export const getEditorChoiceFotos = (page = 1) => {
   return axios
     .get('', {
       params: {
@@ -21,7 +21,7 @@ export const getEditorChoiceFotos = page => {
     .then(response => response.data);
 };
 
-export const getSearchFotos = (page, query) => {
+export const getSearchFotos = (page = 1, query) => {
   return axios
     .get('', {
       params: {

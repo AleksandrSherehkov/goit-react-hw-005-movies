@@ -1,4 +1,5 @@
-import { ErrorMessage, Formik } from 'formik';
+import PropTypes from 'prop-types';
+import { Formik } from 'formik';
 import { inputSchema } from 'services/inputSchema';
 import {
   SearchFormButtonLabelStyled,
@@ -7,6 +8,7 @@ import {
   SearchFormStyled,
   SearchbarStyled,
 } from './Searchbar.styled';
+import { ErrorSearch } from 'components/ErroSearch/ErroSearch';
 
 export const Searchbar = ({ updateSearchQuery }) => {
   const initialValues = {
@@ -33,9 +35,13 @@ export const Searchbar = ({ updateSearchQuery }) => {
             placeholder="Search images and photos"
             autoFocus
           />
-          <ErrorMessage name="searchInput" component="div" />
+          <ErrorSearch name="searchInput" />
         </SearchFormStyled>
       </Formik>
     </SearchbarStyled>
   );
+};
+
+Searchbar.propTypes = {
+  updateSearchQuery: PropTypes.func.isRequired,
 };

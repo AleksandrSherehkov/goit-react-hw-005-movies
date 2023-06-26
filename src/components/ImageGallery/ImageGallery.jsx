@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { ImageGalleryStyled } from './ImageGallery.styled';
 import { getEditorChoiceFotos, getSearchFotos } from 'services/fotosApi';
 import { Button } from 'components/Button/Button';
+import { Loader } from 'components/Loader/Loader';
 
-export default class ImageGallery extends Component {
+export class ImageGallery extends Component {
   state = {
     fotos: [],
     total: 0,
@@ -24,36 +25,38 @@ export default class ImageGallery extends Component {
   }
 
   componentDidMount() {
+    this.setEditorChoiceFoto();
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { page, query } = this.state;
+
+    if (query !== prevState.query || (page !== prevState.page && query)) {
+      this.setSearchFotos();
+    }
+
+    if (page !== prevState.page && !query) {
+      this.setEditorChoiceFoto();
+    }
+  }
+
+  setEditorChoiceFoto = () => {
     const { page } = this.state;
     this.setState({ isLoading: true });
     getEditorChoiceFotos(page)
-      .then(({ hits, total }) => this.setState({ fotos: hits, total }))
+      .then(({ hits, total }) =>
+        this.setState(prevState => ({
+          fotos: page === 1 ? hits : [...prevState.fotos, ...hits],
+          total,
+        }))
+      )
       .catch(err => {
         console.log(err);
       })
       .finally(() => this.setState({ isLoading: false }));
-  }
+  };
 
-  componentDidUpdate(prevProps, prevState) {
-    const { page, query } = this.state;
-
-    if (this.state.page !== prevState.page && query) {
-      this.setSearchNews();
-    }
-    if (this.state.page !== prevState.page && !query) {
-      this.setState({ isLoading: true });
-      getEditorChoiceFotos(page)
-        .then(({ hits, total }) =>
-          this.setState(prevState => ({ fotos: [...prevState.fotos, ...hits] }))
-        )
-        .catch(err => {
-          console.log(err);
-        })
-        .finally(() => this.setState({ isLoading: false }));
-    }
-  }
-
-  setSearchNews = () => {
+  setSearchFotos = () => {
     const { page, query } = this.state;
     this.setState({ isLoading: true });
     getSearchFotos(page, query)
@@ -78,9 +81,11 @@ export default class ImageGallery extends Component {
     return (
       <>
         <ImageGalleryStyled>
-          <ImageGalleryItem fotos={fotos} />
+          {fotos.map(item => (
+            <ImageGalleryItem key={item.id} {...item} />
+          ))}
         </ImageGalleryStyled>
-        {isLoading && <h1>Loading...</h1>}
+        {isLoading && <Loader />}
         {fotos.length > 0 && fotos.length < total && <Button updatePage={this.updatePage} />}
       </>
     );
