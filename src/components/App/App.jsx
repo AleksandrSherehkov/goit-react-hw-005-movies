@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { GlobalStyle } from 'services/styles/GlobalStyle';
@@ -16,7 +17,7 @@ export class App extends Component {
     isLoading: false,
   };
   updateSearchQuery = query => {
-    this.setState({ query, fotos: [], page: 1 });
+    this.setState({ query, fotos: [], page: 1, total: 0 });
   };
 
   componentDidMount() {
@@ -80,13 +81,15 @@ export class App extends Component {
   render() {
     const { fotos, total, isLoading } = this.state;
     return (
-      <WrapperStyled>
-        <Searchbar updateSearchQuery={this.updateSearchQuery} />
-        <ImageGallery fotos={fotos} />
-        {isLoading && <Loader />}
-        {fotos.length > 0 && fotos.length < total && <Button updatePage={this.updatePage} />}
+      <>
+        <WrapperStyled>
+          <Searchbar updateSearchQuery={this.updateSearchQuery} />
+          <ImageGallery fotos={fotos} />
+          {isLoading && <Loader />}
+          {fotos.length > 0 && fotos.length < total && <Button updatePage={this.updatePage} />}
+        </WrapperStyled>
         <GlobalStyle />
-      </WrapperStyled>
+      </>
     );
   }
 }
