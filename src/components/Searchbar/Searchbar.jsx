@@ -35,7 +35,7 @@ export const Searchbar = ({ updateSearchQuery }) => {
             placeholder="Search images and photos"
             autoFocus
           />
-          <ErrorSearch name="searchInput" />
+          <ErrorSearch name="searchInput" component="p" />
         </SearchFormStyled>
       </Formik>
     </SearchbarStyled>

@@ -10,24 +10,22 @@ axios.defaults.params = {
   per_page: 12,
 };
 
-export const getEditorChoiceFotos = (page = 1) => {
-  return axios
-    .get('', {
-      params: {
-        page,
-        editors_choice: true,
-      },
-    })
-    .then(response => response.data);
+export const getEditorChoiceFotos = async (page = 1) => {
+  const data = await axios.get('', {
+    params: {
+      page,
+      editors_choice: true,
+    },
+  });
+  return data;
 };
 
-export const getSearchFotos = (page = 1, query) => {
-  return axios
-    .get('', {
-      params: {
-        q: query,
-        page,
-      },
-    })
-    .then(response => response.data);
+export const getSearchFotos = async (page = 1, query) => {
+  const data = await axios.get('', {
+    params: {
+      q: query,
+      page,
+    },
+  });
+  return data;
 };
