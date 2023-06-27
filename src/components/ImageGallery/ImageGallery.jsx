@@ -46,7 +46,7 @@ export class ImageGallery extends Component {
     getEditorChoiceFotos(page)
       .then(({ hits, total }) =>
         this.setState(prevState => ({
-          fotos: page === 1 ? hits : [...prevState.fotos, ...hits],
+          fotos: [...prevState.fotos, ...hits],
           total,
         }))
       )
@@ -78,6 +78,7 @@ export class ImageGallery extends Component {
 
   render() {
     const { fotos, total, isLoading } = this.state;
+
     return (
       <>
         <ImageGalleryStyled>
