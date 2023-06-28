@@ -4,7 +4,7 @@ import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { GlobalStyle } from 'services/styles/GlobalStyle';
 import { WrapperStyled } from './App.styled';
-import { getEditorChoiceFotos, getSearchFotos } from 'services/fotosApi';
+import { getFotos } from 'services/fotosApi';
 import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
 
@@ -43,7 +43,7 @@ export class App extends Component {
     try {
       const {
         data: { hits, total },
-      } = await getEditorChoiceFotos(page);
+      } = await getFotos(page, '', true);
 
       this.setState(prevState => ({
         fotos: [...prevState.fotos, ...hits],
@@ -62,7 +62,7 @@ export class App extends Component {
     try {
       const {
         data: { hits, total },
-      } = await getSearchFotos(page, query);
+      } = await getFotos(page, query);
       this.setState(prevState => ({
         fotos: [...prevState.fotos, ...hits],
         total,
