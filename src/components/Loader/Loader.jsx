@@ -1,4 +1,3 @@
-import React from 'react';
 import { ProgressBar } from 'react-loader-spinner';
 import { Flex } from './Loader.styled';
 
