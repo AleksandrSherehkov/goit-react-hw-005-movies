@@ -15,7 +15,7 @@ export const Searchbar = ({ updateSearchQuery }) => {
     searchInput: '',
   };
 
-  const hendleSubmit = (values, { resetForm }) => {
+  const handleSubmit = (values, { resetForm }) => {
     const { searchInput } = values;
     updateSearchQuery(searchInput.trim());
 
@@ -24,7 +24,7 @@ export const Searchbar = ({ updateSearchQuery }) => {
 
   return (
     <SearchbarStyled>
-      <Formik initialValues={initialValues} validationSchema={inputSchema} onSubmit={hendleSubmit}>
+      <Formik initialValues={initialValues} validationSchema={inputSchema} onSubmit={handleSubmit}>
         <SearchFormStyled autoComplete="off">
           <SearchFormButtonStyled type="submit">
             <SearchFormButtonLabelStyled>Search</SearchFormButtonLabelStyled>

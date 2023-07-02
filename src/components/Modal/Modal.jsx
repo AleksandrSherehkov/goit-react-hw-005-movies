@@ -1,30 +1,25 @@
 import PropTypes from 'prop-types';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { ModalStyled, OverlayStyled } from './Modal.styled';
 
 const modalContainer = document.getElementById('modal');
 
 export const Modal = ({ tags, largeImageURL, onCloseModal }) => {
-  
-  const handleModalCloseEsc = useCallback(
-    e => {
+  useEffect(() => {
+    const handleModalCloseEsc = e => {
       if (e.code === 'Escape') {
         onCloseModal();
       }
-    },
-    [onCloseModal]
-  );
-
-  useEffect(() => {
+    };
     window.addEventListener('keydown', handleModalCloseEsc);
     return () => {
       window.removeEventListener('keydown', handleModalCloseEsc);
     };
-  }, [handleModalCloseEsc]);
+  }, [onCloseModal]);
 
   const handleModalClose = e => {
-    if (e.target === e.currentTarget) {
+    if (e.currentTarget === e.target) {
       onCloseModal();
     }
   };

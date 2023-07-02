@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+const DEFAULT_PAGE = 1;
+const DEFAULT_QUERY = '';
+const DEFAULT_EDITORS_CHOICE = false;
+
 const API_KEY = '28592682-30ff71119c6d581761e4defab';
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
@@ -10,7 +14,11 @@ axios.defaults.params = {
   per_page: 12,
 };
 
-export const getFotos = async (page = 1, query = '', editorsChoice = false) => {
+export const getFotos = async (
+  page = DEFAULT_PAGE,
+  query = DEFAULT_QUERY,
+  editorsChoice = DEFAULT_EDITORS_CHOICE
+) => {
   const data = await axios.get('', {
     params: {
       page,
