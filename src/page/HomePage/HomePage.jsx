@@ -4,6 +4,7 @@ import { getMoviesTrending } from 'services/api/movieApi';
 import { LoadingIndicator } from 'components/LoadingIndicator/LoadingIndicator';
 import { ErrorIndicator } from 'components/ErrorIndicator/ErrorIndicator';
 import { MoviesList } from 'components/MoviesList/MoviesList';
+import { Section, TitleHomePage } from './HomePage.styled';
 
 const HomePage = () => {
   const [{ results }, error, loading] = useFetch(getMoviesTrending);
@@ -17,10 +18,11 @@ const HomePage = () => {
   }
 
   return (
-    <>
-      <h1>TRENDING TODAY</h1>
+    <Section>
+      <TitleHomePage>TRENDING TODAY</TitleHomePage>
+
       {results && <MoviesList movies={results} />}
-    </>
+    </Section>
   );
 };
 

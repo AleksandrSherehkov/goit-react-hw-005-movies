@@ -5,6 +5,7 @@ import React from 'react';
 
 import { useParams } from 'react-router-dom';
 import { getMovieReviews } from 'services/api/movieApi';
+import { Avtor, Card, Contetnt, NoContetnt, WraperList } from './Reviews.styled';
 
 export const Reviews = () => {
   const { movieId } = useParams();
@@ -19,17 +20,17 @@ export const Reviews = () => {
     return <ErrorIndicator error={error} />;
   }
   return (
-    <ul>
+    <WraperList>
       {results && results.length > 0 ? (
         results.map(({ id, author, content }) => (
-          <li key={id}>
-            <p>{author}</p>
-            <p>{content}</p>
-          </li>
+          <Card key={id}>
+            <Avtor>{author}</Avtor>
+            <Contetnt>{content}</Contetnt>
+          </Card>
         ))
       ) : (
-        <p>We don't have any reviews for this movie.</p>
+        <NoContetnt>We don't have any reviews for this movie.</NoContetnt>
       )}
-    </ul>
+    </WraperList>
   );
 };

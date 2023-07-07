@@ -1,5 +1,19 @@
 import PropTypes from 'prop-types';
+
 import posterBg from 'services/poster1.jpg';
+import {
+  GanresName,
+  Overview,
+  Poster,
+  Release,
+  Title,
+  Value,
+  ValueVote,
+  Wrapper,
+  WrapperGenres,
+  WrapperTitle,
+  WrapperVote,
+} from './MovieDetalisItem.styled';
 
 export const MovieDetailsItem = ({
   title,
@@ -11,32 +25,36 @@ export const MovieDetailsItem = ({
   vote_count,
 }) => {
   return (
-    <div>
-      <img
+    <Wrapper>
+      <Poster
         src={poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : posterBg}
         alt={title}
       />
       <div>
-        <div>
-          <h2>{title}</h2>
-          <p>release: {release_date}</p>
-        </div>
-        <ul>
+        <WrapperTitle>
+          <Title>{title}</Title>
+          <Release>
+            release: <Value>{release_date.split('-').reverse().join('-')}</Value>
+          </Release>
+        </WrapperTitle>
+        <WrapperGenres>
           {genres?.map(({ name, id }) => (
-            <li key={id}>{name}</li>
+            <li key={id}>
+              <GanresName>{name}</GanresName>
+            </li>
           ))}
-        </ul>
-        <p>{overview}</p>
-        <div>
-          <p>
-            Vote average: <span>{vote_average}</span>
-          </p>
-          <p>
-            Vote count: <span>{vote_count}</span>
-          </p>
-        </div>
+        </WrapperGenres>
+        <Overview>{overview}</Overview>
+        <WrapperVote>
+          <Release>
+            Vote average: <ValueVote>{vote_average}</ValueVote>
+          </Release>
+          <Release>
+            Vote count: <ValueVote>{vote_count}</ValueVote>
+          </Release>
+        </WrapperVote>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

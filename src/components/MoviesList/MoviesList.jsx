@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types';
 import { MovieItem } from 'components/MovieItem/MovieItem';
 import { Link, useLocation } from 'react-router-dom';
+import { Card, WraperList } from './MoviesList.styled';
 
 export const MoviesList = ({ movies }) => {
   const location = useLocation();
 
   return (
-    <ul>
+    <WraperList>
       {movies.map(({ id, ...movieData }) => (
-        <li key={id}>
+        <Card key={id}>
           <Link to={`/movies/${id}`} state={{ from: location }}>
             <MovieItem {...movieData} />
           </Link>
-        </li>
+        </Card>
       ))}
-    </ul>
+    </WraperList>
   );
 };
 

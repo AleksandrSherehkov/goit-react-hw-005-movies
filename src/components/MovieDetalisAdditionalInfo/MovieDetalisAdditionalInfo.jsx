@@ -1,22 +1,23 @@
-import { FaChevronRight } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { FcClapperboard, FcRules } from 'react-icons/fc';
+
+import { CustomLink, Title, Wrapper } from './MovieDetalisAdditionalInfo.styled';
 
 export const MovieDetalisAdditionalInfo = () => {
   return (
     <div>
-      <p>Additional Information</p>
-      <ul>
+      <Title>Additional Information</Title>
+      <Wrapper>
         <li>
-          <NavLink to="cast">
-            <FaChevronRight /> Cast
-          </NavLink>
+          <CustomLink to="cast">
+            <FcClapperboard /> Cast
+          </CustomLink>
         </li>
         <li>
-          <NavLink to="reviews">
-            <FaChevronRight /> Reviews
-          </NavLink>
+          <CustomLink to="reviews">
+            <FcRules /> Reviews
+          </CustomLink>
         </li>
-      </ul>
+      </Wrapper>
     </div>
   );
 };

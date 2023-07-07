@@ -1,4 +1,6 @@
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { useRef } from 'react';
+import { FcLeft } from 'react-icons/fc';
 
 import { ErrorIndicator } from 'components/ErrorIndicator/ErrorIndicator';
 import { LoadingIndicator } from 'components/LoadingIndicator/LoadingIndicator';
@@ -7,8 +9,7 @@ import { getMovieDetalis } from 'services/api/movieApi';
 
 import { MovieDetailsItem } from 'components/MovieDetailsItem/MovieDetailsItem';
 import { MovieDetalisAdditionalInfo } from 'components/MovieDetalisAdditionalInfo/MovieDetalisAdditionalInfo';
-import { useRef } from 'react';
-import { FaChevronLeft } from 'react-icons/fa';
+import { LinkGoBack } from './MovieDetailsPage.styled';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -26,12 +27,14 @@ const MovieDetailsPage = () => {
   }
   return (
     <div>
-      <Link to={backLinkLocationRef.current}>
-        <FaChevronLeft />
+      <LinkGoBack to={backLinkLocationRef.current}>
+        <FcLeft />
         Go back
-      </Link>
+      </LinkGoBack>
+
       <MovieDetailsItem {...movie} />
       <MovieDetalisAdditionalInfo />
+
       <Outlet />
     </div>
   );

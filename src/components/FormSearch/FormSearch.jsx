@@ -1,5 +1,7 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { Formik } from 'formik';
+import { FcSearch } from 'react-icons/fc';
 import { useSearchParams } from 'react-router-dom';
+import { ButtonSubmit, ErrorStyled, FieldStyled, FormStyled } from './FormSearch.styled';
 
 export const FormSearch = () => {
   const [, setSearchParams] = useSearchParams();
@@ -28,13 +30,18 @@ export const FormSearch = () => {
       }}
       onSubmit={handleSubmit}
     >
-      <Form autoComplete="off">
-        <button type="submit">
-          <span>Search</span>
-        </button>
-        <Field type="text" name="searchInput" placeholder="Search images and photos" autoFocus />
-        <ErrorMessage name="searchInput" component="div" className="error" />
-      </Form>
+      <FormStyled autoComplete="off">
+        <FieldStyled
+          type="text"
+          name="searchInput"
+          placeholder="Search images and photos"
+          autoFocus
+        />
+        <ButtonSubmit type="submit">
+          <FcSearch />
+        </ButtonSubmit>
+        <ErrorStyled name="searchInput" component="div" className="error" />
+      </FormStyled>
     </Formik>
   );
 };
