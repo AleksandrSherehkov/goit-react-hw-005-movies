@@ -1,24 +1,30 @@
-import { Button } from 'components/Button/Button';
-import { Loader } from 'components/Loader/Loader';
-import { ImageGallery } from '../ImageGallery/ImageGallery';
-import { Searchbar } from '../Searchbar/Searchbar';
-import { GlobalStyle } from 'services/styles/GlobalStyle';
-import { WrapperStyled } from './App.styled';
+import { Route, Routes } from 'react-router-dom';
+import { lazy } from 'react';
+import { SharedLayout } from '../SharedLayout/SharedLayout';
 
-import { useFetchFotos } from 'hook/useFetchFotos';
+import { Cast } from 'components/Cast/Cast';
+import { Reviews } from 'components/Reviews/Reviews';
+
+const HomePage = lazy(() => import('../../page/HomePage/HomePage'));
+const MoviesPage = lazy(() => import('../../page/MoviesPage/MoviesPage'));
+const MovieDetailsPage = lazy(() => import('../../page/MovieDetailsPage/MovieDetailsPage'));
+const NotFound = lazy(() => import('../../page/NotFound/NotFound'));
 
 export const App = () => {
-  const { fotos, total, isLoading, updateSearchQuery, updatePage } = useFetchFotos();
-
   return (
     <>
-      <WrapperStyled>
-        <Searchbar updateSearchQuery={updateSearchQuery} />
-        <ImageGallery fotos={fotos} />
-        {isLoading && <Loader />}
-        {fotos.length > 0 && fotos.length < total && <Button updatePage={updatePage} />}
-      </WrapperStyled>
-      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="movies" element={<MoviesPage />} />
+          <Route path="movies/:movieId" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
+
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </>
   );
 };
