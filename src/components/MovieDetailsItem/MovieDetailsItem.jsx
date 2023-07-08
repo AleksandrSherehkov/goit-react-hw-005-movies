@@ -9,6 +9,7 @@ import {
   Title,
   Value,
   ValueVote,
+  Wrapp,
   Wrapper,
   WrapperGenres,
   WrapperTitle,
@@ -30,7 +31,7 @@ export const MovieDetailsItem = ({
         src={poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : posterBg}
         alt={title}
       />
-      <div>
+      <Wrapp>
         <WrapperTitle>
           <Title>{title}</Title>
           <Release>
@@ -53,7 +54,7 @@ export const MovieDetailsItem = ({
             Vote count: <ValueVote>{vote_count}</ValueVote>
           </Release>
         </WrapperVote>
-      </div>
+      </Wrapp>
     </Wrapper>
   );
 };

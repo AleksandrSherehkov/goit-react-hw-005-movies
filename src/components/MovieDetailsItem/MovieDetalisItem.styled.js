@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const Wrapp = styled.div`
+  outline: 1px dashed #1c6ea4;
+  outline-offset: 0px;
+
+  padding: 10px 20px;
+`;
+
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
